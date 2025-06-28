@@ -55,4 +55,4 @@ quiz_generator
 quiz_master
 app/__pycache__
 
-app/models/
+app/models
