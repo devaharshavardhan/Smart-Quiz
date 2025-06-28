@@ -1,0 +1,58 @@
+# ──────────────
+# Python
+# ──────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Virtual environments
+.env/
+.venv/
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+
+# ──────────────
+# VSCode
+# ──────────────
+.vscode/
+
+# ──────────────
+# OS / IDE junk
+# ──────────────
+.DS_Store
+Thumbs.db
+
+# ──────────────
+# Docker / Container
+# ──────────────
+docker-compose.override.yml
+smart_quiz_ai.tar
+*.tar
+*.img
+*.iso
+
+# ──────────────
+# Models & large files
+# ──────────────
+*.bin
+*.pt
+*.pth
+*.h5
+*.zip
+
+# ──────────────
+# Ignore specific local folders
+# ──────────────
+quiz_generator
+quiz_master
+app/__pycache__
+
+app/models/

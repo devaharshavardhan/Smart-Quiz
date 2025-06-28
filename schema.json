@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Smart Quiz Schema",
+  "type": "object",
+  "required": ["goal", "difficulty"],
+  "properties": {
+    "goal": {
+      "type": "string"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "num_questions": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "question", "answer", "difficulty", "topic"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["mcq", "short_answer"]
+          },
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "difficulty": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
