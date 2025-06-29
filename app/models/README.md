@@ -12,7 +12,7 @@ Instead, you can download the complete `models/` folder as a ZIP file from the l
 
 - `t5-small/` – Fine-tuned T5 model used for question generation.
 - `qa-distilbert/`, `qa-roberta-squad2/` – Trained QA models for answer extraction and context mapping.
-- `sentence-transformer-model/` – Used for semantic similarity in question filtering.
+- `sentence-transformer-model/` – SBERT model used for semantic filtering and generating distractors for MCQs.
 - `grammar-corrector/` – Grammar correction model for polishing generated questions.
 - `spacy/` – spaCy model files for NER and dependency parsing.
 
