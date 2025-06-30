@@ -69,32 +69,34 @@ docker run -p 8000:8000 smart-quiz-ai
 
 ### 2️⃣ Local Development
 
+### 🖥️ Local Development Setup
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/devaharshavardhan/Smart-Quiz.git
 cd Smart-Quiz
 
-# 2. Download large model files (NOT in repo)
-#    See instructions in: app/models/readme.md
+# 2. Download large model files (⚠️ NOT included in the repo)
+#    📄 Follow the instructions in: app/models/readme.md
 
-# Example model folder structure (after extraction):
-app/models/
-├── t5-small/
-├── all-MiniLM-L6-v2/
-├── grammar-corrector/
-├── qa-distil/
-├── qa-roberta-squad2/
-├── spacy/
-└── sentence-transformer-model/
+# ✅ Example: Final folder structure after extracting downloaded models
+# app/models/
+# ├── t5-small/
+# ├── all-MiniLM-L6-v2/
+# ├── grammar-corrector/
+# ├── qa-distil/
+# ├── qa-roberta-squad2/
+# ├── spacy/
+# └── sentence-transformer-model/
 
-# 3. (Optional) Create a virtual environment
+# 3. (Optional) Create and activate a virtual environment
 python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
+source .venv/bin/activate         # On Windows: .venv\Scripts\activate
 
 # 4. Install all dependencies
 pip install -r requirements.txt
 
-# 5. Start the FastAPI server
+# 5. Start the FastAPI development server
 uvicorn app.main:app --reload
 ```
 
