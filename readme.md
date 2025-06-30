@@ -52,24 +52,7 @@ Smart-Quiz/
 └── README.md                        # You're here 🚀
 
 
-## ⚙️ Features
 
-- ✅ **Model-based question generation** using T5-small (offline)
-- 🔁 **Retrieval-based WH-template generation** (TF-IDF + SBERT + NER)
-- 🧠 **Semantic distractor generation** using Sentence-BERT
-- 🧾 **Grammar correction** for refined questions
-- 🔀 Mode switching via `config.json`
-- 🧪 Testable via `pytest`
-- 📦 Docker-ready & fully offline
-
-## 🚀 Quickstart
-
-### 1. Docker Build & Run
-
-```bash
-docker build -t smart-quiz-ai .
-docker run -p 8000:8000 smart-quiz-ai
-```
 
 ### 2. Local Run
 # 1. Clone the repository
