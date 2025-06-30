@@ -13,27 +13,26 @@ A production-ready, containerized microservice for generating intelligent MCQs a
 ```bash
 Smart-Quiz/
 ├── app/
-│   ├── main.py                      # FastAPI entrypoint
-│   ├── model_quiz/
-│   │   ├── config_model.py          # Config handler for model-based generation
-│   │   ├── data_model.py            # Dataset filtering by goal/difficulty
-│   │   ├── entrypoint.py            # Entrypoint for model-based generation
-│   │   ├── loaders_model.py         # Model loaders (T5, SBERT)
-│   │   ├── quiz_model.py            # Core question generator (T5-based)
-│   │   └── utils_model.py           # Semantic filtering, grammar fixes
+│   ├── main.py                      # FastAPI app entrypoint
+│   ├── model_quiz/                  # Model-based generation logic
+│   │   ├── config_model.py
+│   │   ├── data_model.py
+│   │   ├── entrypoint.py
+│   │   ├── loaders_model.py
+│   │   ├── quiz_model.py
+│   │   └── utils_model.py
 │   │
-│   ├── retrieval_quiz/
-│   │   ├── entrypoint.py            # Entrypoint for retrieval-based generation
-│   │   ├── question_matcher.py      # TF-IDF + SBERT sentence retriever
-│   │   ├── quiz_retrieval.py        # WH-template logic
-│   │   ├── retrieval_config.py      # Retrieval-mode configuration
-│   │   └── topic_extractor.py       # Named Entity/topic filtering
+│   ├── retrieval_quiz/              # Retrieval-based generation logic
+│   │   ├── entrypoint.py
+│   │   ├── question_matcher.py
+│   │   ├── quiz_retrieval.py
+│   │   ├── retrieval_config.py
+│   │   └── topic_extractor.py
 │   │
-│   └── models/                      # Local models directory
-│       ├── t5-small/                # Pretrained T5 model (question generation)
-│       └── all-MiniLM-L6-v2/        # SBERT model (semantic distractors)
+│   └── models/                      # ⚠️ Large models not included in Git
+│       └── readme.md                # Contains Google Drive download link & structure
 │
-├── data/                            # Domain-specific question sets
+├── data/                            # Question datasets
 │   ├── Amazon SDE.json
 │   ├── AWS(R).json
 │   ├── CS(R).json
@@ -45,12 +44,13 @@ Smart-Quiz/
 ├── tests/
 │   └── test_generate.py             # Unit test for generation pipeline
 │
-├── config.json                      # Runtime settings (goal, difficulty, mode)
+├── config.json                      # Config: goals, difficulty, mode
 ├── schema.json                      # API input/output schemas
 ├── requirements.txt                 # Python dependencies
 ├── Dockerfile                       # Container configuration
 ├── .gitignore / .dockerignore
-└── README.md 
+└── README.md                        # You're here 🚀
+
 
 ## ⚙️ Features
 
