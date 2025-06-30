@@ -6,42 +6,61 @@ A production-ready, containerized microservice for generating intelligent MCQs a
 
 ## 📦 Project Structure
 
-```
-├── app/
-│   ├── main.py                      # FastAPI app entry
-│   ├── model_quiz/                  # Model-based quiz generator
-│   ├── retrieval_quiz/              # Retrieval-based quiz generator
-│   ├── models/                      # Local HuggingFace/Spacy models
-│   ├── __pycache__/
-│
-├── data/                            # Domain-specific question banks
-│   ├── Amazon SDE.json
-│   ├── GATE ECE.json
-│   └── Model.json
-│
-├── tests/                           # Pytest-based test suite
-│   └── test_generate.py
-│
-├
-│
-├── Dockerfile                       # Docker config for containerization
-├── config.json                      # Runtime config (goals, paths)
-├── requirements.txt
-├── .gitignore / .dockerignore
-```
-
 ---
+
+## 📁 Project Structure
+
+```bash
+Smart-Quiz/
+├── app/
+│   ├── main.py                      # FastAPI entrypoint
+│   ├── model_quiz/
+│   │   ├── config_model.py          # Config handler for model-based generation
+│   │   ├── data_model.py            # Dataset filtering by goal/difficulty
+│   │   ├── entrypoint.py            # Entrypoint for model-based generation
+│   │   ├── loaders_model.py         # Model loaders (T5, SBERT)
+│   │   ├── quiz_model.py            # Core question generator (T5-based)
+│   │   └── utils_model.py           # Semantic filtering, grammar fixes
+│   │
+│   ├── retrieval_quiz/
+│   │   ├── entrypoint.py            # Entrypoint for retrieval-based generation
+│   │   ├── question_matcher.py      # TF-IDF + SBERT sentence retriever
+│   │   ├── quiz_retrieval.py        # WH-template logic
+│   │   ├── retrieval_config.py      # Retrieval-mode configuration
+│   │   └── topic_extractor.py       # Named Entity/topic filtering
+│   │
+│   └── models/                      # Local models directory
+│       ├── t5-small/                # Pretrained T5 model (question generation)
+│       └── all-MiniLM-L6-v2/        # SBERT model (semantic distractors)
+│
+├── data/                            # Domain-specific question sets
+│   ├── Amazon SDE.json
+│   ├── AWS(R).json
+│   ├── CS(R).json
+│   ├── GATE CSE.json
+│   ├── GATE ECE.json
+│   ├── ML(R).json
+│   └── Model.json                   # Central dataset for fine-tuning/testing
+│
+├── tests/
+│   └── test_generate.py             # Unit test for generation pipeline
+│
+├── config.json                      # Runtime settings (goal, difficulty, mode)
+├── schema.json                      # API input/output schemas
+├── requirements.txt                 # Python dependencies
+├── Dockerfile                       # Container configuration
+├── .gitignore / .dockerignore
+└── README.md 
 
 ## ⚙️ Features
 
-- ✅ Model-based question generation (T5-small)
-- 🔁 Retrieval-based template question generation (TF-IDF + SBERT)
-- 🧠 Sentence embedding via Sentence-Transformers
-- 🧾 Grammar correction for question quality
-- 📊 Named entity & POS-aware template rewriting
-- 🧪 Test suite via `pytest`
-
----
+- ✅ **Model-based question generation** using T5-small (offline)
+- 🔁 **Retrieval-based WH-template generation** (TF-IDF + SBERT + NER)
+- 🧠 **Semantic distractor generation** using Sentence-BERT
+- 🧾 **Grammar correction** for refined questions
+- 🔀 Mode switching via `config.json`
+- 🧪 Testable via `pytest`
+- 📦 Docker-ready & fully offline
 
 ## 🚀 Quickstart
 
@@ -60,33 +79,56 @@ uvicorn app.main:app --reload
 ```
 
 ---
-
 ## 🧠 Core Modules
 
 ### 🔧 Entry Point
 
-- `app/main.py` – FastAPI router loader
-
-### 🤖 Model-based Generation
-
-- `app/model_quiz/entrypoint.py` – Uses `t5-small` model
-- `app/model_quiz/quiz_model.py` – Generates questions
-- `app/models/t5-small/` – Local model dir
-
-### 📄 Retrieval-based Generation
-
-- `app/retrieval_quiz/entrypoint.py` – Semantic+TF-IDF quiz generator
-- `app/retrieval_quiz/quiz_retrieval.py` – Template logic
-- `app/retrieval_quiz/question_matcher.py` – Sentence matching
-- `app/retrieval_quiz/topic_extractor.py` – Topic filter
-- `app/models/sentence-transformer-model/` – Embedding model
-
-### 🗃 Datasets
-
-- `data/Model.json` – Central fine-tune dataset
-- Domain sets: `data/Amazon SDE.json`, `data/GATE ECE.json`
+- `app/main.py` – FastAPI app entry point and router configuration
 
 ---
+
+### 🤖 Model-based Generation (`app/model_quiz/`)
+
+- `entrypoint.py` – Handles API requests for model-based question generation
+- `quiz_model.py` – Generates MCQs and short-answer questions using T5
+- `data_model.py` – Filters the dataset by `goal` and `difficulty`
+- `loaders_model.py` – Loads local T5, SBERT, and grammar correction models
+- `config_model.py` – Parses configuration for model generation
+- `utils_model.py` – Utilities: grammar correction, semantic distractor filtering
+
+📦 Models Used:
+- `t5-small/` – T5 model for question generation
+- `all-MiniLM-L6-v2/` – SBERT model for distractor generation
+- `grammar-corrector/` – Grammar correction model
+- `qa-distil/` – Lightweight QA model (DistilBERT)
+- `qa-roberta-squad2/` – Roberta-based QA model
+
+---
+
+### 📄 Retrieval-based Generation (`app/retrieval_quiz/`)
+
+- `entrypoint.py` – Controls the retrieval-based generation flow
+- `quiz_retrieval.py` – WH-question generator using template logic
+- `question_matcher.py` – TF-IDF + SBERT based context matcher
+- `topic_extractor.py` – Extracts topics/entities using spaCy NER
+- `retrieval_config.py` – Reads and applies config settings for retrieval mode
+
+📦 Models Used:
+- `sentence-transformer-model/` – Used for semantic similarity scoring
+- `spacy/` – spaCy model for entity recognition (NER)
+
+---
+
+### 🗃 Datasets (`data/`)
+
+- `Model.json` – Master dataset used for training/fine-tuning/testing
+- Domain-specific question sets:
+  - `Amazon SDE.json`
+  - `AWS(R).json`
+  - `CS(R).json`
+  - `GATE CSE.json`
+  - `GATE ECE.json`
+  - `ML(R).json`
 
 ## 🧪 Testing
 
