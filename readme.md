@@ -75,16 +75,19 @@ docker run -d -p 8000:8000 devacloud999/smart-quiz-ai
 
 # 3. Open in browser:
 http://localhost:8000/doc
-
+```
 ### 🔁 Option 2: Build after cloning the repo using below commands
+```bash
+# 1. Build the image
 docker build -t smart-quiz-ai .
 
-# 5. Run the container
+# 2. Run the container
 docker run -d -p 8000:8000 smart-quiz-ai
 
-# 6. Visit the API
+# 3. Visit the API
 http://localhost:8000/docs
 ### 2️⃣ Local Development
+```
 
 ### 🖥️ Local Development Setup
 
