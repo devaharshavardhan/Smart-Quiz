@@ -88,6 +88,37 @@ docker run -d -p 8000:8000 smart-quiz-ai
 http://localhost:8000/docs
 
 ```
+## 🔀 Switching Between Generation Modes
+
+This project supports two generation methods:
+
+- `"retrieval"` – finds semantically relevant questions from offline dataset.
+- `"model"` – generates questions using T5 + SBERT pipeline.
+
+### ✏️ Edit `config.json` to select mode:
+
+```json
+{
+  "generation_mode": "model",  // or "retrieval"
+  "goal": "GATE ECE",
+  "difficulty": "medium",
+  "num_questions": 5
+}
+```
+
+---
+
+### 📦 Run with custom config (model mode):
+
+If you've set `"generation_mode": "model"` and want the container to pick it up, mount your config file during run:
+
+```bash
+docker run -v $(pwd)/config.json:/app/config.json -p 8000:8000 smart-quiz-ai
+```
+
+> ✅ Note: Make sure `config.json` is in your current directory (`$(pwd)`).
+
+---
 ### 2️⃣ Local Development
 
 ### 🖥️ Local Development Setup
