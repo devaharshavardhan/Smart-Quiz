@@ -48,13 +48,17 @@ Smart-Quiz/
 
 ## ⚙️ Features
 
-- ✅ **Model-based generation** using T5-small (offline)
-- 🔁 **Retrieval-based WH-template generation** (TF-IDF + SBERT + NER)
-- 🧠 **Semantic distractor generation** using Sentence-BERT
-- 🧾 **Grammar correction** for refined questions
-- 🔀 **Dynamic mode switching** via `config.json`
-- 🧪 **Testable** via `pytest`
-- 📦 **Fully Dockerized** & offline-ready
+- Supports **MCQ and short-answer** generation  
+- Dual modes: **retrieval** and **model-based** (configurable)  
+- Configurable via `config.json`  
+- Generates quizzes based on goal, difficulty, and number of questions 
+- Model-based generation** using T5-small (offline)
+- Retrieval-based WH-template generation** (TF-IDF + SBERT + NER)
+- Semantic distractor generation** using Sentence-BERT
+- Grammar correction** for refined questions
+- Dynamic mode switching** via `config.json`
+- Testable** via `pytest`
+- Fully Dockerized** & offline-ready
 
 ---
 
